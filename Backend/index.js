@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose"; 
 import dotenv from "dotenv"; 
 import cors from "cors"; 
-//import route from "./routes/userRouter.js"; // Import the routes file 
+
 // Create an Express app 
 const app = express(); 
 // Load environment variables from .env file 
@@ -23,7 +23,7 @@ useUnifiedTopology: true,
 .then(() => { 
 console.log("Database connected successfully."); 
 // Use the defined routes 
-  // app.use("/api", route); 
+ 
  
     // Start the server 
     app.listen(PORT, () => { 
