@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 7000;
 const MONGOURL = process.env.MONGO_URL; 
 // Connect to MongoDB and start the server 
 mongoose 
-.connect("mongodb://127.0.0.1:27017/mern", { 
+.connect("mongodb://127.0.0.1:27017/Hotel", { 
 useNewUrlParser: true, 
 useUnifiedTopology: true, 
 }) 
