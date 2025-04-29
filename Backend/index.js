@@ -7,7 +7,9 @@ import cookieParser from "cookie-parser";
 import authRoutes from './routes/authRoutes.js';
 import roomRoutes from './routes/roomRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
-import { errorHandler } from './middleware/errorMiddleware.js'; // ✅ Only one import
+import { errorHandler } from './middleware/errorMiddleware.js';
+import adminRoutes from './routes/adminRoutes.js';
+import adminBookingRoutes from './routes/adminBookingRoutes.js'; // ✅ Only one import
 // (Make sure the correct path is ./middleware/errorMiddleware.js)
 
 dotenv.config(); // Load environment variables
@@ -51,9 +53,12 @@ mongoose
     app.use('/api/auth', authRoutes);
     app.use('/api/rooms', roomRoutes);
     app.use('/api/bookings', bookingRoutes);
+    app.use('/api/admin', adminRoutes);
+    app.use('/api/admin', adminBookingRoutes);
 
     // Error Handling Middleware
     app.use(errorHandler);
+    
 
     // Start Server
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

@@ -1,12 +1,27 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
-export const verifyToken = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) return res.status(401).json({ message: 'Not authenticated' });
+// Middleware to verify token
+export const verifyToken = async (req, res, next) => {
+  const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: 'Token not valid' });
-    req.user = user;
+  if (!token) {
+    return res.status(403).json({ message: 'Authentication token is required' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // Attach user info to the request object
     next();
-  });
+  } catch (err) {
+    res.status(401).json({ message: 'Invalid or expired token' });
+  }
+};
+
+// Middleware to verify admin
+export const verifyAdmin = async (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    return next();
+  }
+  res.status(403).json({ message: 'Access denied. Admins only.' });
 };
