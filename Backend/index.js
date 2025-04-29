@@ -15,7 +15,7 @@ dotenv.config(); // Load environment variables
 const app = express();
 
 // CORS Options
-const allowedOrigins = ["http://localhost:3000", "http://localhost:5184"];
+const allowedOrigins = ["http://localhost:3000", "http://localhost:5173"];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {

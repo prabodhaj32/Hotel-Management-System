@@ -1,23 +1,24 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import BrowserRouter
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import BookRoom from './pages/BookRoom';
 
-import './App.css';
-import AdminRegister from './components/AdminRegister';
-import AdminSignIn from './components/AdminSign';
-import ChooseUser from './components/ChoseUser';
-import Home from './components/Home';
-
-const App = () => {
+function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/choose-user" element={<ChooseUser />} />
-        <Route path="/admin-signin" element={<AdminSignIn />} />
-        <Route path="/admin-register" element={<AdminRegister />} />
-      </Routes>
+    <Router>  {/* Wrap your Routes in BrowserRouter */}
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/book/:roomId" element={<BookRoom />} />
+        </Routes>
+      </div>
     </Router>
   );
-};
+}
 
 export default App;
