@@ -19,11 +19,14 @@ function ViewBookings() {
         <p>No bookings available</p>
       ) : (
         bookings.map((booking) => (
-          <div key={booking._id} className="border p-4 mb-2">
-            <p><strong>Room:</strong> {booking.room?.name || 'N/A'}</p> {/* Optional chaining */}
-            <p><strong>User:</strong> {booking.user?.username || 'N/A'}</p> {/* Optional chaining */}
-            <p><strong>From:</strong> {booking.fromDate || 'N/A'}</p>
-            <p><strong>To:</strong> {booking.toDate || 'N/A'}</p>
+          <div key={booking._id} className="border p-4 mb-2 rounded shadow-sm">
+            <p><strong>Room:</strong> {booking.room?.name || 'N/A'}</p>
+            <p><strong>User:</strong> {booking.user?.username || 'N/A'}</p>
+            <p><strong>From:</strong> {new Date(booking.fromDate).toLocaleDateString()}</p>
+            <p><strong>To:</strong> {new Date(booking.toDate).toLocaleDateString()}</p>
+            <p><strong>Name:</strong> {booking.name}</p>
+            <p><strong>Address:</strong> {booking.address}</p>
+            <p><strong>Phone:</strong> {booking.telephone}</p>
           </div>
         ))
       )}

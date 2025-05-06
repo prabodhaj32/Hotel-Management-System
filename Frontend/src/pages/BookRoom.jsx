@@ -6,10 +6,13 @@ function BookRoom() {
   const { roomId } = useParams();
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [telephone, setTelephone] = useState('');
 
   const handleBooking = async (e) => {
     e.preventDefault();
-    await createBooking({ room: roomId, fromDate, toDate });
+    await createBooking({ room: roomId, fromDate, toDate, name, address, telephone });
     alert('Booking Successful!');
   };
 
@@ -25,6 +28,33 @@ function BookRoom() {
         { className: 'text-2xl font-bold text-center', key: 'header' },
         'Book Room'
       ),
+      React.createElement('input', {
+        type: 'text',
+        placeholder: 'Your Name',
+        className: 'w-full p-2 border rounded',
+        value: name,
+        onChange: (e) => setName(e.target.value),
+        required: true,
+        key: 'name',
+      }),
+      React.createElement('input', {
+        type: 'text',
+        placeholder: 'Your Address',
+        className: 'w-full p-2 border rounded',
+        value: address,
+        onChange: (e) => setAddress(e.target.value),
+        required: true,
+        key: 'address',
+      }),
+      React.createElement('input', {
+        type: 'tel',
+        placeholder: 'Telephone Number',
+        className: 'w-full p-2 border rounded',
+        value: telephone,
+        onChange: (e) => setTelephone(e.target.value),
+        required: true,
+        key: 'telephone',
+      }),
       React.createElement('input', {
         type: 'date',
         className: 'w-full p-2 border rounded',

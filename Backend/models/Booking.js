@@ -6,6 +6,9 @@ const bookingSchema = new mongoose.Schema({
   fromDate: { type: Date, required: true },
   toDate: { type: Date, required: true },
   status: { type: String, default: 'booked' },
+  name: { type: String, required: true },
+  address: { type: String, required: true },
+  telephone: { type: String, required: true },
 });
 
 export default mongoose.model('Booking', bookingSchema);
