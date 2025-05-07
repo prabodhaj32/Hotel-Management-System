@@ -9,15 +9,17 @@ import BookRoom from './pages/BookRoom';
 import Dashboard from './pages/admin/Dashboard';
 import ManageRooms from './pages/admin/ManageRooms';
 import ViewBookings from './pages/admin/ViewBookings';
+import UpdateBooking from './pages/admin/UpdateBooking'; // ✅ Don't forget this import
 
 function App() {
   return (
     <Router>
-      <div>
-        <Navbar />
+      {/* Common Navbar */}
+      <Navbar />
 
+      <div className="container mx-auto p-4">
         <Routes>
-          {/* User Routes */}
+          {/* Public/User Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -27,6 +29,7 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/manage-rooms" element={<ManageRooms />} />
           <Route path="/admin/view-bookings" element={<ViewBookings />} />
+          <Route path="/admin/update-booking/:id" element={<UpdateBooking />} /> {/* ✅ Added */}
         </Routes>
       </div>
     </Router>
