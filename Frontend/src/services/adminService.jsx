@@ -1,23 +1,24 @@
+
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api/admin'; // Admin-related base URL
-const BOOKING_API_URL = 'http://localhost:8000/api/bookings'; // Booking-related base URL
+const ADMIN_API_URL = 'http://localhost:8000/api/admin';     // Admin-specific API
+const BOOKING_API_URL = 'http://localhost:8000/api/bookings'; // Booking-specific API
 
-// Fetch all rooms for the admin
+// Fetch all rooms (Admin)
 export const getAllRooms = async () => {
-  const res = await axios.get(`${API_URL}/rooms`, { withCredentials: true });
+  const res = await axios.get(`${ADMIN_API_URL}/rooms`, { withCredentials: true });
   return res.data;
 };
 
-// Delete a specific room by ID
+// Delete a specific room by ID (Admin)
 export const deleteRoom = async (id) => {
-  const res = await axios.delete(`${API_URL}/rooms/${id}`, { withCredentials: true });
+  const res = await axios.delete(`${ADMIN_API_URL}/rooms/${id}`, { withCredentials: true });
   return res.data;
 };
 
-// Fetch all bookings for the admin
+// Fetch all bookings (Admin)
 export const getAllBookings = async () => {
-  const res = await axios.get(`${API_URL}/bookings`, { withCredentials: true });
+  const res = await axios.get(BOOKING_API_URL, { withCredentials: true });
   return res.data;
 };
 

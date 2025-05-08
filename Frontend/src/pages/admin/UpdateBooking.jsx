@@ -1,6 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getBookingById, updateBookingById } from "../../services/adminService"; // fixed path
+import { useNavigate, useParams } from "react-router-dom";
+import { updateBookingById, getAllBookings } from "../../services/adminService";
 
 function UpdateBooking() {
   const { id } = useParams();
@@ -9,14 +9,10 @@ function UpdateBooking() {
 
   useEffect(() => {
     async function fetchBooking() {
-      try {
-        const data = await getBookingById(id);
-        setBooking(data);
-      } catch (error) {
-        console.error("Error fetching booking:", error);
-      }
+      const bookings = await getAllBookings();
+      const found = bookings.find((b) => b._id === id);
+      if (found) setBooking(found);
     }
-
     fetchBooking();
   }, [id]);
 
@@ -27,49 +23,81 @@ function UpdateBooking() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await updateBookingById(id, booking);
-      navigate("/admin/view-bookings");
-    } catch (error) {
-      console.error("Error updating booking:", error);
-    }
+    await updateBookingById(id, booking);
+    navigate("/admin/view-bookings");
   };
 
-  if (!booking) return <p>Loading booking...</p>;
+  if (!booking) return <p className="p-6">Loading...</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">Update Booking</h2>
+    <div className="max-w-xl mx-auto p-6 bg-white shadow rounded">
+      <h2 className="text-2xl font-semibold mb-6">Update Booking</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          value={booking.name}
-          onChange={handleChange}
-          placeholder="Name"
-          className="border p-2 w-full"
-        />
-        <input
-          type="text"
-          name="address"
-          value={booking.address}
-          onChange={handleChange}
-          placeholder="Address"
-          className="border p-2 w-full"
-        />
-        <input
-          type="text"
-          name="telephone"
-          value={booking.telephone}
-          onChange={handleChange}
-          placeholder="Phone"
-          className="border p-2 w-full"
-        />
+        <div>
+          <label className="block text-sm font-medium mb-1">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={booking.name}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 w-full rounded"
+            placeholder="Full name"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Address</label>
+          <input
+            type="text"
+            name="address"
+            value={booking.address}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 w-full rounded"
+            placeholder="Street, City"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Telephone</label>
+          <input
+            type="tel"
+            name="telephone"
+            value={booking.telephone}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 w-full rounded"
+            placeholder="e.g., 0771234567"
+            pattern="[0-9]{10,15}"
+            required
+          />
+        </div>
+
+        {/* Optional: allow editing dates */}
+        <div>
+          <label className="block text-sm font-medium mb-1">From Date</label>
+          <input
+            type="date"
+            name="fromDate"
+            value={booking.fromDate?.split("T")[0]}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 w-full rounded"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">To Date</label>
+          <input
+            type="date"
+            name="toDate"
+            value={booking.toDate?.split("T")[0]}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 w-full rounded"
+          />
+        </div>
+
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
         >
-          Update Booking
+          Save Changes
         </button>
       </form>
     </div>

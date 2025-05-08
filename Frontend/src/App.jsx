@@ -29,7 +29,7 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/manage-rooms" element={<ManageRooms />} />
           <Route path="/admin/view-bookings" element={<ViewBookings />} />
-          <Route path="/admin/update-booking/:id" element={<UpdateBooking />} /> {/* ✅ Added */}
+        <Route path="/admin/update-booking/:id" element={<UpdateBooking />} />
         </Routes>
       </div>
     </Router>

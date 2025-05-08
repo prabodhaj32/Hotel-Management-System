@@ -1,40 +1,4 @@
-// import { useEffect, useState } from 'react';
-// import { getAllBookings } from '../../services/adminService';
 
-// function ViewBookings() {
-//   const [bookings, setBookings] = useState([]);
-
-//   useEffect(() => {
-//     async function fetchBookings() {
-//       const data = await getAllBookings();
-//       setBookings(data);
-//     }
-//     fetchBookings();
-//   }, []);
-
-//   return (
-//     <div className="p-6">
-//       <h2 className="text-xl font-bold mb-4">All Bookings</h2>
-//       {bookings.length === 0 ? (
-//         <p>No bookings available</p>
-//       ) : (
-//         bookings.map((booking) => (
-//           <div key={booking._id} className="border p-4 mb-2 rounded shadow-sm">
-//             <p><strong>Room:</strong> {booking.room?.name || 'N/A'}</p>
-//             <p><strong>User:</strong> {booking.user?.username || 'N/A'}</p>
-//             <p><strong>From:</strong> {new Date(booking.fromDate).toLocaleDateString()}</p>
-//             <p><strong>To:</strong> {new Date(booking.toDate).toLocaleDateString()}</p>
-//             <p><strong>Name:</strong> {booking.name}</p>
-//             <p><strong>Address:</strong> {booking.address}</p>
-//             <p><strong>Phone:</strong> {booking.telephone}</p>
-//           </div>
-//         ))
-//       )}
-//     </div>
-//   );
-// }
-
-// export default ViewBookings;
 
 import { useEffect, useState } from "react";
 import { getAllBookings, deleteBookingById } from "../../services/adminService";
@@ -70,7 +34,7 @@ function ViewBookings() {
         bookings.map((booking) => (
           <div key={booking._id} className="border p-4 mb-2 rounded shadow-sm">
             <p><strong>Room:</strong> {booking.room?.name || 'N/A'}</p>
-            <p><strong>User:</strong> {booking.user?.username || 'N/A'}</p>
+            {/* <p><strong>User:</strong> {booking.user?.username || 'N/A'}</p> */}
             <p><strong>From:</strong> {new Date(booking.fromDate).toLocaleDateString()}</p>
             <p><strong>To:</strong> {new Date(booking.toDate).toLocaleDateString()}</p>
             <p><strong>Name:</strong> {booking.name}</p>
